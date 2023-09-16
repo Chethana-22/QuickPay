@@ -1,3 +1,6 @@
+
+import Navbar from "../components/Navbar";
+import SideBar from "../components/SideBar";
 import { useState, useEffect } from 'react'
 import Action from '../components/header/Action'
 import NavMenu from '../components/header/NavMenu'
@@ -12,7 +15,6 @@ import { getAvatarUrl } from "../functions/getAvatarUrl"
 import { useCashApp } from '../hooks/CashApp'
 
 
-
 const Home = () => {
     const { connected, publicKey, avatar, userAddress, transactions, newTransactionModalOpen, setNewTransactionModalOpen } = useCashApp();
     const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
@@ -22,22 +24,15 @@ const Home = () => {
 
 
     return (
-        <div className="flex min-h-screen ">
-            <header className="flex w-[250px] flex-col bg-[#0bb534] p-12">
-                <Profile setModalOpen={setTransactionQRModalOpen} avatar={avatar} userAddress={userAddress} />
-                <TransactionQRModal modalOpen={transactionQRModalOpen} setModalOpen={setTransactionQRModalOpen} userAddress={userAddress} setQrCode={setQrCode} myKey={publicKey} />
-
-                <NavMenu connected={connected} publicKey={publicKey} />
-
-                <Action setModalOpen={setNewTransactionModalOpen} />
-                <NewTransactionModal modalOpen={newTransactionModalOpen} setModalOpen={setNewTransactionModalOpen} />
-            </header>
-
-            <main className="flex flex-1 flex-col">
-                <SearchBar />
-
-                <TransactionsList connected={connected} transactions={transactions} />
-            </main>
+        <div className="App">
+        <div className="relative bg-[#13131a] sm:-8 p-4 flex flex-row min-h-screen  ">
+      <div className="sm:flex hidden mr-10 relative text-white">
+        <SideBar />
+      </div>
+      <div className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
+        <Navbar />
+        </div>
+        </div>
         </div>
     )
 }
